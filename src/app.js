@@ -6,13 +6,14 @@ const bodyParser = require('body-parser');
 require('./helpers/helpers');
 
 
-
 const dirNodeModules = path.join(__dirname, '../node_modules');
 app.use('/css', express.static(dirNodeModules + '/bootstrap/dist/css'));
 app.use('/js', express.static(dirNodeModules + '/jquery/dist'));
 app.use('/js', express.static(dirNodeModules + '/popper.js/dist'));
 app.use('/js', express.static(dirNodeModules + '/bootstrap/dist/js'));
 
+//modalidad 1 virtual 2 presencial
+//estado 1 disponible 0 cerrado
 
 const directoriopublico = path.join(__dirname, '../public');
 app.use(express.static(directoriopublico));
@@ -36,6 +37,31 @@ app.get('/listado', (req, res) => {
     });
 });
 
+
+app.get('/crearcurso', (req, res) => {
+    res.render('crearcurso', {
+        titulo: 'Crear Curso'
+    });
+});
+app.get('/vercursos', (req, res) => {
+    res.render('vercursos', {
+        titulo: 'Ver cursos'
+    });
+});
+
+
+app.post('/registrarcurso', (req, res) => {
+    console.log(req.body)
+    res.render('registrarcurso', {
+        id: Number(req.body.id),
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        valor: Number(req.body.valor),
+        modalidad: Number(req.body.modalidad),
+        horas: Number(req.body.horas)
+    });
+});
+
 app.post('/calculos', (req, res) => {
     res.render('calculos', {
         nombre: req.body.nombre,
@@ -51,6 +77,6 @@ app.get('*', (req, res) => {
     });
 })
 
-app.listen(3000, () => {
-    console.log("Server en puerto 3000")
+app.listen(3001, () => {
+    console.log("Server en puerto 3001")
 })

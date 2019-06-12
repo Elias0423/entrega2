@@ -27,29 +27,31 @@ hbs.registerHelper('listar', () => {
   return texto;
 })
 
-hbs.registerHelper('listar2', () => {
-  listarEstudiantes = require('../listado.json');
+hbs.registerHelper('verCursos', () => {
+  listadoCursos = require('../files/cursos');
   let texto = '<div class="accordion" id="accordionExample"> ';
   let i = 1;
-  listarEstudiantes.forEach(estudiante => {
-    texto = ` ${texto} <div class="card">
+  listadoCursos.forEach(curso => {
+    if (curso.estado == 1) {
+      texto = ` ${texto} <div class="card">
               <div class="card-header" id="heading${i}">
                 <h2 class="mb-0">
                   <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${i}" aria-expanded="true" aria-controls="collapse${i}">
-                    El estudiante ${estudiante.nombre} tiene:
+                    Curso: ${curso.nombre} descripcion: ${curso.descripcion} valor: ${curso.valor}
                   </button>
                 </h2>
               </div>
           
               <div id="collapse${i}" class="collapse" aria-labelledby="heading${i}" data-parent="#accordionExample">
                 <div class="card-body">
-                  Nota en matematicas: ${estudiante.matematicas} <br>
-                  Nota en Ingles: ${estudiante.ingles} <br>
-                  Nota en Progrmacion: ${estudiante.programacion} <br>
+                  Descripcion: ${curso.descripcion} <br>
+                  Modalidad: ${curso.modalidad==1 ? "Virtual" : "Presencial"} <br>
+                  Intensidad Horaria: ${curso.horas} <br>
                 </div>
               </div> 
             </div> `
-    i = i + 1;
+      i = i + 1;
+    }
   });
   texto = texto + '</div>'
 

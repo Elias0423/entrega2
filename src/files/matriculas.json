@@ -1,0 +1,14 @@
+[
+    {
+        "curso": 1,
+        "estudiante": 123
+    },
+    {
+        "curso": 1,
+        "estudiante": 234
+    },
+    {
+        "curso": 1,
+        "estudiante": 345
+    }
+]
