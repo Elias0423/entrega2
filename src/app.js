@@ -12,8 +12,6 @@ app.use('/js', express.static(dirNodeModules + '/jquery/dist'));
 app.use('/js', express.static(dirNodeModules + '/popper.js/dist'));
 app.use('/js', express.static(dirNodeModules + '/bootstrap/dist/js'));
 
-//modalidad 1 virtual 2 presencial
-//estado 1 disponible 0 cerrado
 
 const directoriopublico = path.join(__dirname, '../public');
 app.use(express.static(directoriopublico));

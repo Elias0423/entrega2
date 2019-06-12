@@ -3,18 +3,21 @@
         "identificacion": 123,
         "nombre": "elias",
         "correo": "eliasramos159@gmail.com",
-        "telefono": 4444444
+        "telefono": 4444444,
+        "rol": 1
     },
     {
         "identificacion": 234,
         "nombre": "sara",
         "correo": "sara@gmail.com",
-        "telefono": 666666
+        "telefono": 666666,
+        "rol": 2
     },
     {
         "identificacion": 345,
         "nombre": "camilo",
         "correo": "camilo@gmail.com",
-        "telefono": 5555555
+        "telefono": 5555555,
+        "rol": 3
     }
 ]
