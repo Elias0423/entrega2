@@ -1,14 +1,1 @@
-[
-    {
-        "curso": 1,
-        "estudiante": 123
-    },
-    {
-        "curso": 1,
-        "estudiante": 234
-    },
-    {
-        "curso": 1,
-        "estudiante": 345
-    }
-]
+[{"curso":1,"identificacion":234},{"curso":1,"identificacion":345},{"identificacion":"123","curso":"1"}]

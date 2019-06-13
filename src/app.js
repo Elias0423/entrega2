@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
+const funciones = require('./files/funciones');
 require('./helpers/helpers');
 
 
@@ -19,62 +20,111 @@ app.use(express.static(directoriopublico));
 const directoriopartials = path.join(__dirname, '../templates/partials');
 hbs.registerPartials(directoriopartials);
 
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.set('views', './templates/views/')
 app.set('view engine', 'hbs');
 
 app.get('/', (req, res) => {
+  res.render('index', {
+    titulo: 'Inicio'
+  });
+});
+
+app.get('/registrarusuario', (req, res) => {
+  res.render('registrarusuario');
+});
+
+app.post('/registrarusuario', (req, res) => {
+  res.render('registrouser', {
+    identificacion: Number(req.body.identificacion),
+    nombre: req.body.nombre,
+    correo: req.body.correo,
+    telefono: req.body.telefono,
+    rol: Number(1),
+    pass: req.body.pass
+  });
+});
+
+app.post('/iniciarsesion', (req, res) => {
+  var user = funciones.validarLogin(req.body.identificacion, req.body.pass);
+  if (user != false) {
+
+    if (user.rol == 1) {
+      res.render('vercursosactivos', {
+        usuario: user
+      });
+    } else {
+      res.render('vercursos', {
+        usuario: user
+      });
+    }
+  } else {
     res.render('index', {
-        titulo: 'Inicio'
-    });
+      message: "El usuario no existe actualmente"
+    })
+  }
 });
 
 app.get('/listado', (req, res) => {
-    res.render('listado', {
-        titulo: 'Listado'
-    });
+  res.render('listado', {
+    titulo: 'Listado'
+  });
 });
 
-
-app.get('/crearcurso', (req, res) => {
-    res.render('crearcurso', {
-        titulo: 'Crear Curso'
-    });
+app.get('/crearcursos', (req, res) => {
+  res.render('crearcursos', {
+    titulo: 'Crear Curso'
+  });
 });
+
+app.get('/vercursosactivos', (req, res) => {
+  res.render('vercursosactivos');
+});
+
 app.get('/vercursos', (req, res) => {
-    res.render('vercursos', {
-        titulo: 'Ver cursos'
-    });
+  res.render('vercursos');
+});
+
+app.get('/matricular', (req, res) => {
+  res.render('matricular');
+});
+
+app.post('/matricular', (req, res) => {
+  console.log(req.body)
+  var mensaje = funciones.matricularAspirante(req.body.identificacion, req.body.curso);
+  res.render('matricular', {
+    message: mensaje
+  });
 });
 
 
 app.post('/registrarcurso', (req, res) => {
-    console.log(req.body)
-    res.render('registrarcurso', {
-        id: Number(req.body.id),
-        nombre: req.body.nombre,
-        descripcion: req.body.descripcion,
-        valor: Number(req.body.valor),
-        modalidad: Number(req.body.modalidad),
-        horas: Number(req.body.horas)
-    });
+  console.log(req.body)
+  res.render('registrarcurso', {
+    id: Number(req.body.id),
+    nombre: req.body.nombre,
+    descripcion: req.body.descripcion,
+    valor: Number(req.body.valor),
+    modalidad: Number(req.body.modalidad),
+    horas: Number(req.body.horas)
+  });
 });
 
 app.post('/calculos', (req, res) => {
-    res.render('calculos', {
-        nombre: req.body.nombre,
-        nota1: Number(req.body.nota1),
-        nota2: Number(req.body.nota2),
-        nota3: Number(req.body.nota3)
-    });
+  res.render('calculos', {
+    nombre: req.body.nombre,
+    nota1: Number(req.body.nota1),
+    nota2: Number(req.body.nota2),
+    nota3: Number(req.body.nota3)
+  });
 });
 
 app.get('*', (req, res) => {
-    res.render('error', {
-        estudiante: "error"
-    });
+  res.render('error', {
+    estudiante: "error"
+  });
 })
 
 app.listen(3001, () => {
-    console.log("Server en puerto 3001")
+  console.log("Server en puerto 3001")
 })

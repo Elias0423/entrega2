@@ -1,0 +1,26 @@
+{{>headerAspirante}}
+<br>
+<p>Por favor inicie sesión</p>
+
+<form action="/matricular" , method="post">
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <label>Documento de identidad</label>
+        <input type="number" class="form-control" name="identificacion" placeholder="Documento" required>
+      </div>
+      <div class="col">
+        <label>Curso</label>
+        <select class="form-control" name="curso" required>
+          {{{listarCursos}}}
+        </select>
+      </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Inscribir curso</button>
+</form>
+
+<br>
+{{message}}
+<br>
+{{>footer}}

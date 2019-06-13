@@ -16,5 +16,14 @@
         "modalidad": "2",
         "horas": 32,
         "estado": 1
+    },
+    {
+        "id": 3,
+        "nombre": "diseño",
+        "descripcion": "curso de adobe",
+        "valor": 12000,
+        "modalidad": "2",
+        "horas": 32,
+        "estado": 0
     }
 ]

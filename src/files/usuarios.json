@@ -1,23 +1,34 @@
 [
     {
-        "identificacion": 123,
-        "nombre": "elias",
-        "correo": "eliasramos159@gmail.com",
-        "telefono": 4444444,
-        "rol": 1
-    },
-    {
-        "identificacion": 234,
-        "nombre": "sara",
-        "correo": "sara@gmail.com",
-        "telefono": 666666,
-        "rol": 2
-    },
-    {
         "identificacion": 345,
         "nombre": "camilo",
         "correo": "camilo@gmail.com",
         "telefono": 5555555,
-        "rol": 3
+        "rol": 2,
+        "pass": "123"
+    },
+    {
+        "identificacion": 6666,
+        "nombre": "sara",
+        "correo": "eliasramos159@gmail.com",
+        "telefono": "3046840376",
+        "rol": 1,
+        "pass": "asd"
+    },
+    {
+        "identificacion": 12345678,
+        "nombre": "elias",
+        "correo": "eliasramos159@hotmail.com",
+        "telefono": "3046840376",
+        "rol": 1,
+        "pass": "123"
+    },
+    {
+        "identificacion": 123,
+        "nombre": "sara",
+        "correo": "sara@gmaol.com",
+        "telefono": "123",
+        "rol": 1,
+        "pass": "sara"
     }
 ]
