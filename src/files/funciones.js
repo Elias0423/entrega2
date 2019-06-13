@@ -152,5 +152,33 @@ const eliminarAspirante = (identificacion, curso) => {
   guardarMatricula();
 }
 
+const obtenerUsuario = (identificacion) => {
+  listaUsuarios = require('./usuarios.json');
+  let user = listaUsuarios.find(usuario => usuario.identificacion == identificacion);
+  if (!user) {
+    return false;
+  } else {
+    return user;
+  }
+}
 
-module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso, cargarInscritos, cambiarEstadoCurso, eliminarAspirante }
+const actualizarUsuario = (identificacion, nombre, correo, telefono, rol) => {
+  listaUsuarios = require('./usuarios.json');
+
+  var user = listaUsuarios.find(usuario => usuario.identificacion == identificacion);
+  user = {
+    identificacion: identificacion,
+    nombre: nombre,
+    correo: correo,
+    telefono: telefono,
+    rol: rol
+  }
+  for (let i = 0; i < listaUsuarios.length; i++) {
+    if (listaUsuarios[i].identificacion == identificacion) {
+      listaUsuarios[i] = user
+    }
+  }
+  guardarUsuario();
+}
+
+module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso, cargarInscritos, cambiarEstadoCurso, eliminarAspirante, obtenerUsuario, actualizarUsuario }

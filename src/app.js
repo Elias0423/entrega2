@@ -129,6 +129,44 @@ app.post('/eliminaraspirantes', (req, res) => {
   });
 });
 
+
+app.get('/actualizar', (req, res) => {
+  res.render('actualizar');
+});
+
+app.post('/actualizar', (req, res) => {
+  var user = funciones.obtenerUsuario(req.body.identificacion);
+  if (user == false) {
+    res.render('actualizar', {
+      message: "No se encontró el usuario"
+    });
+  } else {
+    res.render('actualizarusuario', {
+      identificacion: user.identificacion,
+      nombre: user.nombre,
+      correo: user.correo,
+      telefono: user.telefono,
+      rol: user.rol
+    });
+  }
+});
+
+
+app.post('/actualizarusuario', (req, res) => {
+  console.log(req.body)
+  funciones.actualizarUsuario(req.body.identificacion, req.body.nombre, req.body.correo, req.body.telefono, req.body.rol);
+  var user = funciones.obtenerUsuario(req.body.identificacion);
+    res.render('actualizarusuario', {
+      identificacion: user.identificacion,
+      nombre: user.nombre,
+      correo: user.correo,
+      telefono: user.telefono,
+      rol: user.rol,
+      message: "Informacion actualizada correctamente"
+    });
+});
+
+
 app.get('*', (req, res) => {
   res.render('error', {
     estudiante: "error"

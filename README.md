@@ -15,5 +15,4 @@ estado curso:
 
 roles:
 1 aspirante
-2 coordinador
-3 interesado
+2 coordinador/profesor
