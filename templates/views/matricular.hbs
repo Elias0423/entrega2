@@ -1,7 +1,5 @@
 {{>headerAspirante}}
 <br>
-<p>Por favor inicie sesión</p>
-
 <form action="/matricular" , method="post">
   <div class="form-group">
     <div class="row">
@@ -18,9 +16,12 @@
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Inscribir curso</button>
+    <br>
 </form>
 
 <br>
-{{message}}
+<div class="alert alert-info" role="alert">
+  {{message}}
+</div>
 <br>
 {{>footer}}

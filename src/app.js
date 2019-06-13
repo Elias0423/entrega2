@@ -106,12 +106,14 @@ app.post('/crearcursos', (req, res) => {
   });
 });
 
-app.post('/calculos', (req, res) => {
-  res.render('calculos', {
-    nombre: req.body.nombre,
-    nota1: Number(req.body.nota1),
-    nota2: Number(req.body.nota2),
-    nota3: Number(req.body.nota3)
+app.get('/inscritos', (req, res) => {
+  res.render('inscritos');
+});
+
+app.post('/cambiarestado', (req, res) => {
+  funciones.cambiarEstadoCurso(req.body.curso)
+  res.render('inscritos', {
+    message: "Estado del curso cambiado a cerrado"
   });
 });
 

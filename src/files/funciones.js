@@ -101,8 +101,44 @@ const guardarCurso = () => {
   let datos = JSON.stringify(listaCursos);
   fs.writeFile(__dirname + '/cursos.json', datos, (err) => {
     if (err) console.log(err);
-    console.log("curso creado")
+    console.log("curso guardado")
   });
 }
 
-module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso }
+const cargarInscritos = () => {
+  listaCursos = require('./cursos.json');
+  listaMatriculas = require('./matriculas.json');
+  listaUsuarios = require('./usuarios.json');
+
+  var datos = []
+  for (let i = 0; i < listaCursos.length; i++) {
+    if (listaCursos[i].estado == 1) {
+      var curso = {
+        id: listaCursos[i].id,
+        nombre: listaCursos[i].nombre,
+        aspirantes: []
+      }
+      for (let j = 0; j < listaMatriculas.length; j++) {
+        if (listaMatriculas[j].curso == curso.id) {
+          curso.aspirantes.push(listaUsuarios.find(user => user.identificacion == listaMatriculas[j].identificacion));
+        }
+      }
+      datos.push(curso);
+    }
+  }
+  return datos;
+}
+
+const cambiarEstadoCurso = (id) => {
+  listaCursos = require('./cursos.json');
+  let curso = listaCursos.find(curso => curso.id == id);
+  curso.estado = 0;
+  for (let i = 0; i < listaCursos.length; i++) {
+    if (listaCursos[i].id == curso.id) {
+      listaCursos[i] = curso;
+    }
+  }
+  guardarCurso();
+}
+
+module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso, cargarInscritos, cambiarEstadoCurso }
