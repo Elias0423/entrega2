@@ -4,7 +4,7 @@
   <div class="form-group">
     <div class="row">
       <div class="col">
-        <label>Documento de identidad</label>
+        <label>Documento de identidad (No Modificar)</label>
         <input type="number" class="form-control" name="identificacion" placeholder="Documento"
           value="{{identificacion}}" >
       </div>
@@ -27,8 +27,7 @@
       <div class="col">
         <label>Rol</label>
         <select class="form-control" name="rol" required>
-          <option value="1">Aspirante</option>
-          <option value="2">Profesor</option>
+          {{{listarRol rol}}}
         </select>
       </div>
     </div>
@@ -38,7 +37,7 @@
 </form>
 <br>
 <div class="alert alert-info" role="alert">
-  {{mensaje}}
+  {{message}}
 </div>
 <br>
 {{>footer}}

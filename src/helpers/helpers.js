@@ -169,3 +169,15 @@ hbs.registerHelper('verInscritosCurso', (id) => {
   });
   return texto;
 })
+
+hbs.registerHelper('listarRol', (rol) => {
+  let texto = "";
+  if (rol == 1) {
+    texto = `${texto} <option selected value="1">Aspirante</option>
+            <option value="2">Profesor</option>`
+  } else {
+    texto = `${texto} <option value="1">Aspirante</option>
+            <option selected value="2">Profesor</option>`
+  }
+  return texto;
+})
