@@ -98,15 +98,11 @@ app.post('/matricular', (req, res) => {
 });
 
 
-app.post('/registrarcurso', (req, res) => {
-  console.log(req.body)
-  res.render('registrarcurso', {
-    id: Number(req.body.id),
-    nombre: req.body.nombre,
-    descripcion: req.body.descripcion,
-    valor: Number(req.body.valor),
-    modalidad: Number(req.body.modalidad),
-    horas: Number(req.body.horas)
+app.post('/crearcursos', (req, res) => {
+  var mensaje = funciones.crearCurso(Number(req.body.id), req.body.nombre, req.body.descripcion, Number(req.body.valor), Number(req.body.modalidad), Number(req.body.horas), 1)
+
+  res.render('crearcursos', {
+    message: mensaje
   });
 });
 

@@ -1,6 +1,7 @@
 const fs = require('fs');
 listaUsuarios = [];
 listaMatriculas = [];
+listaCursos = [];
 const registrarUsuario = (identificacion, nombre, correo, telefono, rol, pass) => {
   listaUsuarios = require('./usuarios.json');
   let user = {
@@ -76,4 +77,32 @@ const guardarMatricula = () => {
   });
 }
 
-module.exports = { registrarUsuario, validarLogin, matricularAspirante }
+const crearCurso = (id, nombre, descripcion, valor, modalidad, horas, estado) => {
+  listaCursos = require('./cursos.json');
+  let curso = {
+    id: id,
+    nombre: nombre,
+    descripcion: descripcion,
+    valor: valor,
+    modalidad: modalidad,
+    horas: horas,
+    estado: estado
+  };
+  let validacion = listaCursos.find(curso => curso.id == id);
+  if (!validacion) {
+    listaCursos.push(curso);
+    guardarCurso();
+    return 'Curso creado exitosamente'
+  } else {
+    return 'El id del curso ya existe'
+  }
+}
+const guardarCurso = () => {
+  let datos = JSON.stringify(listaCursos);
+  fs.writeFile(__dirname + '/cursos.json', datos, (err) => {
+    if (err) console.log(err);
+    console.log("curso creado")
+  });
+}
+
+module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso }

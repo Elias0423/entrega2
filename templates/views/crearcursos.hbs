@@ -1,9 +1,8 @@
-{{>header}}
-
+{{>headerCoordinador}}
 
 <br>
 <p>Ingrese los datos del curso en el siguiente formulario</p>
-<form action="/crearcurso" , method="post">
+<form action="/crearcursos" , method="post">
   <div class="form-group">
     <div class="row">
       <div class="col">
@@ -16,7 +15,7 @@
       </div>
       <div class="col">
         <label>Valor</label>
-        <input type="number" class="form-control" name="valor" placeholder="Valor curso">
+        <input type="number" class="form-control" name="valor" placeholder="Valor curso" required>
       </div>
     </div>
     <br>
@@ -48,5 +47,7 @@
     <br>
     <button type="submit" class="btn btn-primary">Crear curso</button>
 </form>
-
+<br>
+{{message}}
+<br>
 {{>footer}}
