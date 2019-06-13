@@ -84,7 +84,7 @@ hbs.registerHelper('verCursos', () => {
                   Descripcion: ${curso.descripcion} <br>
                   Modalidad: ${curso.modalidad == 1 ? "Virtual" : "Presencial"} <br>
                   Intensidad Horaria: ${curso.horas} <br>
-                  Estado: ${curso.estado == 1 ? "Abierto" : "Cerrado"}
+                  Estado: ${curso.estado == 1 ? "Disponible" : "Cerrado"}
                 </div>
               </div> 
             </div> 
