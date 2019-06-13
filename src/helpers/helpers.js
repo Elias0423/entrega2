@@ -133,10 +133,39 @@ hbs.registerHelper('verInscritos', () => {
           '</tr>';
       })
     }
-
     texto = texto + '</tbody> </table>'
   });
-
   return texto;
 })
 
+hbs.registerHelper('verInscritosCurso', (id) => {
+  var info = funciones.cargarInscritos();
+  let texto = ""
+
+  info.forEach(datos => {
+    if (datos.id == id) {
+      texto = texto + "Aspirantes del curso: <strong>" + datos.nombre + "</strong> despues de eliminar<br>\
+        <table class='table table-striped'> \
+        <thead class='thead-dark'>\
+          <th>Identificación aspirante</th>\
+          <th>Nombre aspirante</th>\
+          <th>Correo aspirante</th>\
+          <th>telefono aspirante</th>\
+        </thead>\
+        <tbody>";
+      if (datos.aspirantes != undefined) {
+        datos.aspirantes.forEach(estudiante => {
+          texto = texto + '<tr>' +
+            "<td>" + estudiante.identificacion + '</td>' +
+            "<td>" + estudiante.nombre + '</td>' +
+            "<td>" + estudiante.correo + '</td>' +
+            "<td>" + estudiante.telefono + '</td>' +
+            '</tr>';
+        })
+      }
+      texto = texto + '</tbody> </table>'
+    }
+
+  });
+  return texto;
+})

@@ -117,6 +117,18 @@ app.post('/cambiarestado', (req, res) => {
   });
 });
 
+app.get('/eliminaraspirantes', (req, res) => {
+  res.render('eliminaraspirantes');
+});
+
+app.post('/eliminaraspirantes', (req, res) => {
+  funciones.eliminarAspirante(req.body.identificacion, req.body.curso);
+  res.render('verinscritos', {
+    message: "Aspirante eliminado exitosamente",
+    curso: req.body.curso
+  });
+});
+
 app.get('*', (req, res) => {
   res.render('error', {
     estudiante: "error"

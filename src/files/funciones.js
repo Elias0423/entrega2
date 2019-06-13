@@ -141,4 +141,16 @@ const cambiarEstadoCurso = (id) => {
   guardarCurso();
 }
 
-module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso, cargarInscritos, cambiarEstadoCurso }
+const eliminarAspirante = (identificacion, curso) => {
+  listaMatriculas = require('./matriculas.json');
+
+  for (let i = 0; i < listaMatriculas.length; i++) {
+    if (listaMatriculas[i].identificacion == identificacion && listaMatriculas[i].curso == curso) {
+      listaMatriculas.splice(i, 1)
+    }
+  }
+  guardarMatricula();
+}
+
+
+module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso, cargarInscritos, cambiarEstadoCurso, eliminarAspirante }
