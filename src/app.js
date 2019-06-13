@@ -153,19 +153,36 @@ app.post('/actualizar', (req, res) => {
 
 
 app.post('/actualizarusuario', (req, res) => {
-  console.log(req.body)
-  funciones.actualizarUsuario(req.body.identificacion, req.body.nombre, req.body.correo, req.body.telefono, req.body.rol);
+  funciones.actualizarUsuario(Number(req.body.identificacion), req.body.nombre, req.body.correo, req.body.telefono, Number(req.body.rol));
   var user = funciones.obtenerUsuario(req.body.identificacion);
-    res.render('actualizarusuario', {
-      identificacion: user.identificacion,
-      nombre: user.nombre,
-      correo: user.correo,
-      telefono: user.telefono,
-      rol: user.rol,
-      message: "Informacion actualizada correctamente"
-    });
+  res.render('actualizarusuario', {
+    identificacion: user.identificacion,
+    nombre: user.nombre,
+    correo: user.correo,
+    telefono: user.telefono,
+    rol: user.rol,
+    message: "Informacion actualizada correctamente"
+  });
 });
 
+
+app.get('/buscarcursos', (req, res) => {
+  res.render('buscarcursos');
+});
+
+app.post('/buscarcursos', (req, res) => {
+  res.render('miscursos', {
+    identificacion: req.body.identificacion
+  });
+});
+
+app.post('/cancelarinscripcion', (req, res) => {
+  funciones.eliminarAspirante(req.body.identificacion, req.body.curso);
+  res.render('miscursos', {
+    identificacion: req.body.identificacion,
+    message: "Cancelacion exitosa"
+  });
+});
 
 app.get('*', (req, res) => {
   res.render('error', {

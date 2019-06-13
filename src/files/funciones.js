@@ -171,7 +171,8 @@ const actualizarUsuario = (identificacion, nombre, correo, telefono, rol) => {
     nombre: nombre,
     correo: correo,
     telefono: telefono,
-    rol: rol
+    rol: rol,
+    pass: user.pass
   }
   for (let i = 0; i < listaUsuarios.length; i++) {
     if (listaUsuarios[i].identificacion == identificacion) {
@@ -181,4 +182,17 @@ const actualizarUsuario = (identificacion, nombre, correo, telefono, rol) => {
   guardarUsuario();
 }
 
-module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso, cargarInscritos, cambiarEstadoCurso, eliminarAspirante, obtenerUsuario, actualizarUsuario }
+const verMisCursos = (identificacion) => {
+  listaCursos = require('./cursos.json');
+  listaMatriculas = require('./matriculas.json');
+
+  var datos = []
+  for (let i = 0; i < listaMatriculas.length; i++) {
+    if (listaMatriculas[i].identificacion == identificacion) {
+      datos.push(listaCursos.find(curso => curso.id == listaMatriculas[i].curso));
+    }
+  }
+  return datos;
+}
+
+module.exports = { registrarUsuario, validarLogin, matricularAspirante, crearCurso, cargarInscritos, cambiarEstadoCurso, eliminarAspirante, obtenerUsuario, actualizarUsuario, verMisCursos }

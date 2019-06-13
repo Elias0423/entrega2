@@ -181,3 +181,34 @@ hbs.registerHelper('listarRol', (rol) => {
   }
   return texto;
 })
+
+hbs.registerHelper('verMisCursos', (identificacion) => {
+  var info = funciones.verMisCursos(identificacion);
+  let texto = "<table class='table table-striped'> \
+        <thead class='thead-dark'>\
+          <th>ID Curso</th>\
+          <th>Nombre curso</th>\
+          <th>Descripcion Curso</th>\
+        </thead>\
+        <tbody>";
+  info.forEach(datos => {
+    texto = texto + '<tr>' +
+      "<td>" + datos.id + '</td>' +
+      "<td>" + datos.nombre + '</td>' +
+      "<td>" + datos.descripcion + '</td>' +
+      '</tr>';
+  });
+  texto = texto + '</tbody> </table>'
+  return texto;
+})
+
+hbs.registerHelper('listarMisCursos', (identificacion) => {
+  var cursos = funciones.verMisCursos(identificacion);
+  let texto = '';
+
+  cursos.forEach(curso => {
+    texto = ` ${texto} <option value="${curso.id}">${curso.nombre}</option> `
+  });
+
+  return texto;
+})
