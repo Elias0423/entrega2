@@ -6,13 +6,6 @@
   <div class="form-group">
     <div class="row">
       <div class="col">
-        <label>Documento de identidad</label>
-        <br>
-        <label>{{identificacion}}</label>
-        <input type="number" class="form-control" name="identificacion" placeholder="Documento"
-          value="{{identificacion}}" hidden>
-      </div>
-      <div class="col">
         <label>Curso a cancelar inscripción</label>
         <select class="form-control" name="curso" required>
           {{{listarMisCursos identificacion}}}
