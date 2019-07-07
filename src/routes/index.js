@@ -30,16 +30,14 @@ app.post('/iniciarsesion', (req, res) => {
   var user = funciones.validarLogin(req.body.identificacion, req.body.pass);
   if (user != false) {
     req.session.identificacion = user.identificacion;
-    req.session.nombre = user.nombre;
+    req.session.nombre = user.nombre + " ";
     if (user.rol == 1) {
       res.render('vercursosactivos', {
-        nombre: req.session.nombre,
-        sesion: true
+        nombre: req.session.nombre
       });
     } else {
       res.render('vercursos', {
-        nombre: req.session.nombre,
-        sesion: true
+        nombre: req.session.nombre
       });
     }
   } else {
@@ -133,7 +131,7 @@ app.get('/eliminaraspirantes', (req, res) => {
 
 app.post('/eliminaraspirantes', (req, res) => {
   funciones.eliminarAspirante(req.body.identificacion, req.body.curso);
-  res.render('verinscritos', {
+  return res.render('verinscritos', {
     nombre: req.session.nombre,
     message: "Aspirante eliminado exitosamente",
     curso: req.body.curso
@@ -150,7 +148,7 @@ app.get('/actualizar', (req, res) => {
 app.post('/actualizar', (req, res) => {
   var user = funciones.obtenerUsuario(req.body.identificacion);
   if (user == false) {
-    res.render('actualizar', {
+    return res.render('actualizar', {
       message: "No se encontró el usuario"
     });
   } else {
@@ -168,7 +166,7 @@ app.post('/actualizar', (req, res) => {
 app.post('/actualizarusuario', (req, res) => {
   funciones.actualizarUsuario(Number(req.body.identificacion), req.body.nombre, req.body.correo, req.body.telefono, Number(req.body.rol));
   var user = funciones.obtenerUsuario(req.body.identificacion);
-  res.render('actualizarusuario', {
+  return res.render('actualizarusuario', {
     identificacion: user.identificacion,
     nombre: user.nombre,
     correo: user.correo,
@@ -188,9 +186,7 @@ app.get('/salir', (req, res) => {
 })
 
 app.get('*', (req, res) => {
-  res.render('error', {
-    estudiante: "error"
-  });
+  res.render('error');
 })
 
 module.exports = app
